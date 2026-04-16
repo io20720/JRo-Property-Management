@@ -93,7 +93,13 @@
     #about { background: var(--navy); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-img-wrap { position: relative; }
-    .about-img-block { width: 100%; aspect-ratio: 4/5; background: linear-gradient(160deg, var(--slate) 0%, var(--ocean) 100%); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: rgba(255,255,255,0.15); }
+    .about-img-block {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 2px;
+      background: url('https://images.unsplash.com/photo-1520520731457-9283dd14aa66?w=800&q=80') center/cover no-repeat;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    }
     .about-accent { position: absolute; bottom: -1.5rem; right: -1.5rem; width: 60%; aspect-ratio: 1; border: 2px solid var(--ocean); border-radius: 2px; z-index: -1; }
     .about-content .section-tag { color: var(--fog); }
     .about-content .section-title { color: var(--sand); }
@@ -226,7 +232,7 @@
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-img-wrap reveal">
-        <div class="about-img-block">🌊</div>
+        <div class="about-img-block"></div>
         <div class="about-accent"></div>
       </div>
       <div class="about-content reveal">
