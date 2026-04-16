@@ -131,6 +131,15 @@
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,43,60,0.7); z-index: 999; align-items: center; justify-content: center; }
+    .modal-overlay.active { display: flex; }
+    .modal-box { background: var(--white); border-radius: 4px; padding: 3rem 2.5rem; max-width: 440px; width: 90%; text-align: center; animation: fadeUp 0.3s ease; }
+    .modal-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .modal-box h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 0.75rem; }
+    .modal-box p { color: var(--light-text); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.75rem; }
+    .modal-close { background: var(--ocean); color: var(--white); border: none; padding: 0.75rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; border-radius: 2px; cursor: pointer; transition: background 0.2s; }
+    .modal-close:hover { background: #3a6f95; }
+
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -285,6 +294,15 @@
   </div>
 </footer>
 
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-box">
+    <div class="modal-icon">✉️</div>
+    <h3>Message Sent!</h3>
+    <p>Thanks for reaching out. We'll get back to you as soon as possible.</p>
+    <button class="modal-close" onclick="document.getElementById('success-modal').classList.remove('active')">Got it</button>
+  </div>
+</div>
+
 <script>
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -310,10 +328,8 @@
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (res.ok) {
-          status.textContent = 'Message sent! We\'ll be in touch soon.';
-          status.style.color = '#4a7fa5';
-          status.style.display = 'block';
           form.reset();
+          document.getElementById('success-modal').classList.add('active');
         } else {
           throw new Error('error');
         }
